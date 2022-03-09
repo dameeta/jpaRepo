@@ -1,0 +1,141 @@
+package com.pack.coll;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Stock {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int stid;
+	private String stname;
+	
+	@ElementCollection
+	private List<StockDetails> stockdetail=new ArrayList<StockDetails>();
+
+	public int getStid() {
+		return stid;
+	}
+
+	public void setStid(int stid) {
+		this.stid = stid;
+	}
+
+	public String getStname() {
+		return stname;
+	}
+
+	public void setStname(String stname) {
+		this.stname = stname;
+	}
+
+	public List<StockDetails> getStockdetail() {
+		return stockdetail;
+	}
+
+	public void setStockdetail(List<StockDetails> stockdetail) {
+		this.stockdetail = stockdetail;
+	}
+}
+==================================================================
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="stockcollection" transaction-type="RESOURCE_LOCAL">
+    
+<class>com.pack.coll.Stock</class> 
+<class>com.pack.coll.StockDetails</class>      
+     
+        <properties>
+            <!-- Configuring The Database Connection Details -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hbdb" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="root" />          
+       		<property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+        </properties>
+        
+    </persistence-unit>
+</persistence>
+=====================================================================
+package com.pack.coll;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Stock {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int stid;
+	private String stname;
+	
+	@ElementCollection
+	private List<StockDetails> stockdetail=new ArrayList<StockDetails>();
+
+	public int getStid() {
+		return stid;
+	}
+
+	public void setStid(int stid) {
+		this.stid = stid;
+	}
+
+	public String getStname() {
+		return stname;
+	}
+
+	public void setStname(String stname) {
+		this.stname = stname;
+	}
+
+	public List<StockDetails> getStockdetail() {
+		return stockdetail;
+	}
+
+	public void setStockdetail(List<StockDetails> stockdetail) {
+		this.stockdetail = stockdetail;
+	}
+}
+
+==================================================================
+package com.pack.coll;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class StockDetails {
+
+	private String stockname;
+	private String date;
+	private String description;
+	public String getStockname() {
+		return stockname;
+	}
+	public void setStockname(String stockname) {
+		this.stockname = stockname;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+}
+===================================================================
