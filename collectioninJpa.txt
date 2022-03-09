@@ -32,6 +32,57 @@ public class Stock {
 	public void setStname(String stname) {
 		this.stname = stname;
 	}
+========================================================================================================================
+
+package com.pack;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import com.pack.coll.Stock;
+import com.pack.coll.StockDetails;
+
+public class StockMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+EntityManagerFactory emr=Persistence.createEntityManagerFactory("stockcollection");
+EntityManager em=emr.createEntityManager();
+em.getTransaction().begin();
+
+StockDetails sd1=new StockDetails();
+
+sd1.setStockname("Pens");
+sd1.setDescription("WhiteBoardMarkerPens");
+sd1.setDate("3rdMarch2021");
+
+StockDetails sd2=new StockDetails();
+
+sd2.setStockname("Tshirts");
+sd2.setDescription("Sport T-Shirts");
+sd2.setDate("7rdMarch2020");
+		
+Stock s1=new Stock();
+s1.setStid(1201);
+s1.setStname("Stationary");
+s1.getStockdetail().add(sd1);
+
+Stock s2=new Stock();
+s2.setStid(1202);
+s2.setStname("Clothes");
+s2.getStockdetail().add(sd2);
+
+em.persist(s1);
+em.persist(s2);
+
+em.getTransaction().commit();
+em.close();
+emr.close();
+	
+	}
+
+}
 
 	public List<StockDetails> getStockdetail() {
 		return stockdetail;
